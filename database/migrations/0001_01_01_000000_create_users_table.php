@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('password');
 
             $table->string('avatar')->nullable();
-            $table->boolean('status')->default(true);
+            $table->enum('status', ["pending", "active", "blocked"])->default("pending");
             $table->foreignId('role_id')->constrained()->default(2);
             $table->timestamp('last_login_at')->nullable();
-
+            $table->integer('password_attempts')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
