@@ -42,9 +42,9 @@ class Link extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function clickLogs()
+    public function linkClicks()
     {
-        return $this->hasMany(ClickLog::class);
+        return $this->hasMany(LinkClick::class);
     }
 
     public function stats()
