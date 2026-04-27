@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('link_stats_daily', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('link_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('link_id')->constrained()->cascadeOnDelete();
 
             $table->date('date');
 

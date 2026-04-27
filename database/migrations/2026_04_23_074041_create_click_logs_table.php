@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('click_logs', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('link_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('link_id')->constrained()->cascadeOnDelete();
 
             $table->string('ip_address', 45)->nullable();
 

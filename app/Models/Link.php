@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Link extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUlids;
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'user_id',
+        'guest_id',
         'title',
         'original_url',
         'short_code',

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('qr_codes', function (Blueprint $table) {
-            $table->id();
+            $table->ulid("id")->primary();
 
-            $table->foreignId('link_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('link_id')->constrained()->cascadeOnDelete();
 
             $table->json('style_json')->nullable();
 
