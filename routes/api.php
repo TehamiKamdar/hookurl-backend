@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::post("/register", [AuthController::class , 'register']);
 Route::post("/login", [AuthController::class , 'login']);
 
-// Route::middleware('auth:sanctum')->group(function(){
-// });
-Route::prefix('links')->group(function () {
-    Route::get('', [LinkController::class , 'index']);
-    Route::post('create', [LinkController::class , 'create']);
+Route::middleware('auth:sanctum')->group(function(){
+    Route::prefix('links')->group(function () {
+        Route::get('', [LinkController::class , 'index']);
+        Route::post('', [LinkController::class , 'store']);
+    });
 });
