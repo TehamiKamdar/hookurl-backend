@@ -63,7 +63,11 @@ class LinkController extends Controller
         } else {
             $userId = null;
             $ownerType = 'guest';
-            $guestId = $request->guest_id ?? (string) Str::ulid();
+            $guestId = $request->header('X-GUEST-ID');
+            
+            if (!$guestId) {
+                $guestId = (string) Str::ulid();
+            }
         }
 
         // short code
