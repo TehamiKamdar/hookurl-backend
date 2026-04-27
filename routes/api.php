@@ -9,14 +9,20 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::get('/', [HomeController::class , 'index']);
 
+// Links fetch and create from homepage
+Route::get('/', [HomeController::class , 'index']);
+Route::post('', [LinkController::class , 'store']);
+
+
+// Auth APIs
 Route::post("/register", [AuthController::class , 'register']);
 Route::post("/login", [AuthController::class , 'login']);
 
+
+// For Dashboard
 Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('links')->group(function () {
         Route::get('', [LinkController::class , 'index']);
     });
 });
-Route::post('', [LinkController::class , 'store']);
