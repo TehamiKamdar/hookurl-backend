@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 // Links fetch and create from homepage
 Route::get('/', [HomeController::class , 'index']);
-Route::post('', [LinkController::class , 'store']);
+Route::post('/', [LinkController::class , 'store']);
 
 
 // Auth APIs
