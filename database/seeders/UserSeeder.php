@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'User',
             'email' => 'user@hookurl.io',
-            'password' => 'admin@213',
+            'password' => 'user@213',
             'status' => 'active',
             'role_id' => 2,
         ]);

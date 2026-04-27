@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->ulid("id")->primary();
 
-            $table->foreignUlid('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('user_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->string('title')->nullable();
 
