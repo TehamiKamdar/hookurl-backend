@@ -55,6 +55,8 @@ class LinkController extends Controller
         // Auth check
         $user = Auth::user();
 
+        // dd($user);
+
         // Guest ID logic (IMPORTANT)
         if ($user) {
             $userId = $user->id;
@@ -64,7 +66,7 @@ class LinkController extends Controller
             $userId = null;
             $ownerType = 'guest';
             $guestId = $request->header('X-GUEST-ID');
-            
+
             if (!$guestId) {
                 $guestId = (string) Str::ulid();
             }
@@ -91,13 +93,15 @@ class LinkController extends Controller
 
         $slug = $link->custom_alias ?: $link->short_code;
 
-        return response()->json([
+        $response =  response()->json([
             'status' => true,
             'message' => 'Link created successfully',
             'data' => [
                 'id' => $link->id,
                 'title' => $link->title,
-                'original' => $link->original_url,
+                'original_url' => $link->original_url,
+                'custom_alias' => $link->custom_alias,
+                'short_code' => $link->short_code,
                 'short_url' => url($slug),
                 'owner_type' => $ownerType,
                 // IMPORTANT for frontend persistence
@@ -105,6 +109,12 @@ class LinkController extends Controller
                 'guest_id' => $guestId,       // For not loggedin users
             ],
         ], 201);
+
+        if ($guestId) {
+            $response->cookie('guest_id', $guestId, 60 * 24 * 365);
+        }
+
+        return $response;
     }
 
     private function generateUniqueCode()
@@ -128,5 +138,20 @@ class LinkController extends Controller
             str_contains($host, 'medium') => 'Medium Link',
             default => $host ? ucfirst($host) : 'Short Link'
         };
+    }
+
+    public function aliasCheck($alias)
+    {
+        if (!$alias) {
+            return response()->json([
+                'exists' => false
+            ]);
+        }
+
+        $exists = Link::where('custom_alias', $alias)->exists();
+
+        return response()->json([
+            'exists' => $exists
+        ]);
     }
 }

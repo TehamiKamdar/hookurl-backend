@@ -18,13 +18,5 @@ class UserSeeder extends Seeder
             'status' => 'active',
             'role_id' => 1,
         ]);
-
-        User::create([
-            'name' => 'User',
-            'email' => 'user@hookurl.io',
-            'password' => 'user@213',
-            'status' => 'active',
-            'role_id' => 2,
-        ]);
     }
 }

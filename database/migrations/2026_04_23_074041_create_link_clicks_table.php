@@ -13,6 +13,26 @@ return new class extends Migration
     {
         Schema::create('link_clicks', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignUlid('link_id')->constrained()->onDelete('cascade');
+
+            $table->ipAddress('ip_address')->nullable();
+
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+
+            $table->string('device_type')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('os')->nullable();
+
+            $table->text('referer')->nullable();
+
+            $table->string('utm_source')->nullable();
+            $table->string('utm_medium')->nullable();
+            $table->string('utm_campaign')->nullable();
+
+            $table->timestamp('clicked_at')->nullable();
+
             $table->timestamps();
         });
     }

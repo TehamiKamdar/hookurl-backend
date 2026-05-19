@@ -14,20 +14,28 @@ class HomeController extends Controller
         $user = Auth::user();
 
         if ($user) {
+
             $links = Link::where('user_id', $user->id)
                 ->latest()
                 ->get();
 
             $ownerType = 'authenticated';
+
         } else {
-            $guestId = $request->header('X-GUEST-ID');
+
+            // COOKIE READ
+            $guestId = $request->cookie('guest_id');
 
             if ($guestId) {
+
                 $links = Link::where('guest_id', $guestId)
                     ->latest()
                     ->get();
+
             } else {
-                $links = null; // no guest id, no data
+
+                $links = [];
+
             }
 
             $ownerType = 'guest';

@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->string('avatar')->nullable();
             $table->enum('status', ["pending", "active", "blocked"])->default("pending");
-            $table->foreignId('role_id')->constrained()->default(2);
+            $table->foreignId('role_id')->default(2)->constrained();
             $table->timestamp('last_login_at')->nullable();
             $table->integer('password_attempts')->default(0);
             $table->rememberToken();

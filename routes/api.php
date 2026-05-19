@@ -10,19 +10,9 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 
-// Links fetch and create from homepage
-Route::get('/', [HomeController::class , 'index']);
-Route::post('/', [LinkController::class , 'store']);
-
-
 // Auth APIs
-Route::post("/register", [AuthController::class , 'register']);
-Route::post("/login", [AuthController::class , 'login']);
 
 
-// For Dashboard
-Route::middleware('auth:sanctum')->group(function(){
-    Route::prefix('links')->group(function () {
-        Route::get('', [LinkController::class , 'index']);
-    });
+Route::get('/test', function () {
+    return response('ok')->header('X-Test', 'working');
 });
